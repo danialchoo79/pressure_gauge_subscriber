@@ -130,17 +130,26 @@ def on_message(client, userdata, msg):
             camera_id = msg.topic.split("/")[1]
             date_folder = get_date_folder()
             save_path = os.path.join(SAVE_DIR, date_folder, camera_id)
-            os.makedirs(save_path, exist_ok=True)
 
+            # Ensure Save Path Exists
+            try:
+                os.makedirs(save_path, exist_ok=True)
+            except Exception as e:
+                logging.error(f"Failed to create directory {save_path} : {e}")
+                return
+
+            # Save Image
             timestamp = get_timestamp()
             filename = f"{camera_id}_{timestamp}.jpg"
             full_path = os.path.join(save_path, filename)
 
-            with open(full_path, "wb") as f:
-                f.write(image_data)
-
-            logging.info(f"Image saved: {full_path} ({len(image_data)} bytes)")
-
+            try:
+                with open(full_path, "wb") as f:
+                    f.write(image_data)
+            except Exception as e:
+                logging.info(f"Image saved ({camera_id}): {full_path} ({len(image_data)} bytes)")
+                return
+            
             # Per-Camera CSV Log
             per_cam_log_file = get_cam_log_path(camera_id)
 
