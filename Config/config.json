@@ -1,0 +1,17 @@
+{
+    "program_mode": "PROD",
+    "program_version": "V1.1",
+    "log_base_fp": "/home/admin/Desktop/pressure_gauge_subscriber/logs",
+    "log_fp": "/home/admin/Desktop/pressure_gauge_subscriber/logs/pressure.log",
+    "base_output_path": "/home/admin/Desktop/pressure_gauge_subscriber/output",
+    "line_config": {
+        "201": {
+            "PRESSURE_PUMP_1": {
+                "Cam_1": "cam1",
+                "IP_1": "128.53.208.3",
+                "Cam_2": "cam2",
+                "IP_2": "128.53.208.2"
+            }
+        }
+    }
+}

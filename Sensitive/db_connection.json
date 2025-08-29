@@ -1,0 +1,8 @@
+{
+    "spt_db_connections": {
+        "DATABASE": "spt_db",
+        "USER": "spt_admin",
+        "PASSWORD": "sptadmin",
+        "HOST": "10.53.8.71"
+    }
+}

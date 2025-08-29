@@ -1,10 +1,17 @@
+# pylint: disable=all
+
 import paho.mqtt.client as mqtt
 import os
 import csv
 import datetime
+import time
+import random
 import threading
 import logging
 import time
+from process_img_rpi import main as process_image_main
+import subprocess
+import queue
 
 # MQTT Configuration
 MQTT_BROKER = "128.53.209.104"
@@ -50,6 +57,9 @@ client.will_set("system/status/raspi", payload="disconnected", qos=1, retain=Tru
 heartbeat_timer = None
 message_count = 0
 
+# Queue
+image_queue = queue.Queue()
+
 # === Utility Functions ===
 
 def get_timestamp():
@@ -78,7 +88,44 @@ def cancel_heartbeat():
         heartbeat_timer.cancel()
         logging.info("Heartbeat cancelled.")
         heartbeat_timer = None
-    
+
+def run_processing(full_path, output_dir):
+    """ Runs the image processing script"""
+
+    result = subprocess.run(
+        ["python3","process_img_rpi.py", full_path, output_dir,"lineA","pumpA"],
+        capture_output=True,
+        text=True
+    )
+
+    if result.returncode == 0:
+        try:
+            value = float(result.stdout.strip())
+            logging.info(f"Processing result for {full_path} : {value}")
+            return value
+        except ValueError:
+            logging.error(f"Unexpected Output: {result.stdout}")
+            return None
+        
+    else:
+        logging.error(f"Process failed: {result.stderr}")
+        return None
+            
+def process_worker():
+    """ Continuously process images from the queue """
+    while True:
+        full_path, output_dir = image_queue.get()
+        value = run_processing(full_path, output_dir)
+        
+        if value is not None:
+            logging.info(f"Value is {value}")
+       
+        image_queue.task_done()
+
+# Start 4 workers in the background
+for _ in range(4):
+    threading.Thread(target=process_worker, daemon=True).start()
+     
 # === MQTT Callbacks ===
 def on_connect(client, userdata,flags, rc):
     if rc == 0:
@@ -146,9 +193,20 @@ def on_message(client, userdata, msg):
             try:
                 with open(full_path, "wb") as f:
                     f.write(image_data)
+                    logging.info(f"Image saved: {full_path}. Size: {len(image_data)} bytes.")
+
+                    # === Do Image Processing ===
+                    
+                    output_dir = os.path.join(save_path, "processed")
+                    os.makedirs(output_dir, exist_ok=True)
+
+                    # enqueue the processing task
+                    image_queue.put((full_path, output_dir))
+                    logging.info(f"Queued image for processing: {full_path}")
+                    return
+
             except Exception as e:
-                logging.info(f"Image saved ({camera_id}): {full_path} ({len(image_data)} bytes)")
-                return
+                logging.error(f"Image saved: {full_path} : {e}")
             
             # Per-Camera CSV Log
             per_cam_log_file = get_cam_log_path(camera_id)
@@ -199,7 +257,6 @@ client.on_disconnect = on_disconnect
 
 # Main 
 if __name__ == "__main__":
-
     try:
         client.connect(MQTT_BROKER, MQTT_PORT, keepalive=60)
         client.loop_forever()

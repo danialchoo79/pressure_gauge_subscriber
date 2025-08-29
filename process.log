@@ -1,0 +1,164 @@
+python3: can't open file '/home/admin/Desktop/pressure_gauge_subscriber/process_image_rpi.py': [Errno 2] No such file or directory
+python3: can't open file '/home/admin/Desktop/pressure_gauge_subscriber/process_image_rpi.py': [Errno 2] No such file or directory
+python3: can't open file '/home/admin/Desktop/pressure_gauge_subscriber/process_image_rpi.py': [Errno 2] No such file or directory
+x-centroid: 119, y-centroid: 121, radius: 91
+min_angle: 47,
+ max_angle: 315,
+ min_value: 0,
+ max_value: 4,
+ x-coor: 119,
+ y-coor: 121,
+ r-coor: 91
+
+[np.float64(81.83520025025906), np.float64(65.0)]
+Lines Coordinates are x1: 79, y1: 58, x2: 123, y2: 127, x3: 83, y3: 72, x4: 116, y4: 128
+x-intercept is 23 and y-intercept is -29
+The lines are okay.
+Angle computed is 2.014652881675262
+119
+121
+23
+-29
+2.8284271247461903
+180.8535318980528
+-0.9981299440890585
+1.4953527343571922
+----result: 1.50----
+x-centroid: 118, y-centroid: 120, radius: 91
+min_angle: 47,
+ max_angle: 315,
+ min_value: 0,
+ max_value: 4,
+ x-coor: 118,
+ y-coor: 120,
+ r-coor: 91
+
+[np.float64(81.83520025025906), np.float64(65.0)]
+Lines Coordinates are x1: 79, y1: 58, x2: 123, y2: 127, x3: 83, y3: 72, x4: 116, y4: 128
+x-intercept is 23 and y-intercept is -29
+The lines are okay.
+Angle computed is 2.014652881675262
+118
+120
+23
+-29
+2.8284271247461903
+179.47144619688115
+-0.9997936310130408
+1.496775454344883
+----result: 1.50----
+x-centroid: 118, y-centroid: 123, radius: 92
+min_angle: 47,
+ max_angle: 315,
+ min_value: 0,
+ max_value: 4,
+ x-coor: 118,
+ y-coor: 123,
+ r-coor: 92
+
+[np.float64(81.83520025025906), np.float64(65.0)]
+Lines Coordinates are x1: 79, y1: 58, x2: 123, y2: 127, x3: 83, y3: 72, x4: 116, y4: 128
+x-intercept is 23 and y-intercept is -29
+The lines are okay.
+Angle computed is 2.014652881675262
+118
+123
+23
+-29
+2.8284271247461903
+182.00274723201295
+-1.0087025585814573
+1.5043940207576894
+----result: 1.50----
+x-centroid: 123, y-centroid: 121, radius: 90
+min_angle: 47,
+ max_angle: 315,
+ min_value: 0,
+ max_value: 4,
+ x-coor: 123,
+ y-coor: 121,
+ r-coor: 90
+
+[np.float64(81.83520025025906), np.float64(65.0)]
+Lines Coordinates are x1: 79, y1: 58, x2: 123, y2: 127, x3: 83, y3: 72, x4: 116, y4: 128
+x-intercept is 23 and y-intercept is -29
+The lines are okay.
+Angle computed is 2.014652881675262
+123
+121
+23
+-29
+2.8284271247461903
+183.05190520723897
+-0.9797634294924663
+1.4796464094206228
+----result: 1.48----
+x-centroid: 122, y-centroid: 122, radius: 95
+min_angle: 47,
+ max_angle: 315,
+ min_value: 0,
+ max_value: 4,
+ x-coor: 122,
+ y-coor: 122,
+ r-coor: 95
+
+[np.float64(81.83520025025906), np.float64(65.0)]
+Lines Coordinates are x1: 79, y1: 58, x2: 123, y2: 127, x3: 83, y3: 72, x4: 116, y4: 128
+x-intercept is 23 and y-intercept is -29
+The lines are okay.
+Angle computed is 2.014652881675262
+122
+122
+23
+-29
+2.8284271247461903
+183.3303030052588
+-0.9873322699970494
+1.4861189857895822
+----result: 1.49----
+x-centroid: 120, y-centroid: 121, radius: 93
+min_angle: 47,
+ max_angle: 315,
+ min_value: 0,
+ max_value: 4,
+ x-coor: 120,
+ y-coor: 121,
+ r-coor: 93
+
+[np.float64(81.83520025025906), np.float64(65.0)]
+Lines Coordinates are x1: 79, y1: 58, x2: 123, y2: 127, x3: 83, y3: 72, x4: 116, y4: 128
+x-intercept is 23 and y-intercept is -29
+The lines are okay.
+Angle computed is 2.014652881675262
+120
+121
+23
+-29
+2.8284271247461903
+181.39735389470266
+-0.9934966784568726
+1.4913905468036508
+1.49
+x-centroid: 122, y-centroid: 121, radius: 92
+min_angle: 47,
+ max_angle: 315,
+ min_value: 0,
+ max_value: 4,
+ x-coor: 122,
+ y-coor: 121,
+ r-coor: 92
+
+[np.float64(81.83520025025906), np.float64(65.0)]
+Lines Coordinates are x1: 79, y1: 58, x2: 123, y2: 127, x3: 83, y3: 72, x4: 116, y4: 128
+x-intercept is 23 and y-intercept is -29
+The lines are okay.
+Angle computed is 2.014652881675262
+122
+121
+23
+-29
+2.8284271247461903
+182.49657531033287
+-0.9843134789161955
+1.483537433727423
+1.48

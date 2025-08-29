@@ -1,3 +1,5 @@
+# pylint: disable=all
+
 """
 Copyright (c) 2017 Intel Corporation.
 Licensed under the MIT license. See LICENSE file in the project root for full license information.
@@ -13,6 +15,7 @@ import arrow
 import sys
 import os
 import math
+import sys
 
 def dist_2_pts(x1, y1, x2, y2):
     
@@ -115,14 +118,14 @@ def intersect_hough_for_needle(lines,edges,img, cx, cy):
             if abs(angle1 - angle2) < 10:
                 pt = intersect((x1,y1), (x2,y2), (x3,y3), (x4,y4))
 
-                print(f"Lines Coordinates are x1: {x1}, y1: {y1}, x2: {x2}, y2: {y2}, x3: {x3}, y3: {y3}, x4: {x4}, y4: {y4}")
+                print(f"Lines Coordinates are x1: {x1}, y1: {y1}, x2: {x2}, y2: {y2}, x3: {x3}, y3: {y3}, x4: {x4}, y4: {y4}", file=sys.stderr)
 
                 try:
                     # Get the intersection coordinates
                     x_in, y_in = pt
-                    print(f"x-intercept is {x_in} and y-intercept is {y_in}")
+                    print(f"x-intercept is {x_in} and y-intercept is {y_in}", file=sys.stderr)
                 except:
-                    print("x-intercept, y-intercept cant find, restarting algorithm")
+                    print("x-intercept, y-intercept cant find, restarting algorithm", file=sys.stderr)
                     python = sys.executable
                     os.execv(python, [python] + sys.argv)
 
@@ -137,7 +140,7 @@ def intersect_hough_for_needle(lines,edges,img, cx, cy):
                     found = True
                     break
             else:
-                print("Cannot get coordinates, restarting algorithm")
+                print("Cannot get coordinates, restarting algorithm", file=sys.stderr)
                 python = sys.executable
                 os.execv(python, [python] + sys.argv)
 
@@ -182,11 +185,11 @@ def check_intersect_lines(x1, y1, x2, y2, x3, y3, x4, y4, angle_thresh=2):
     angle_deg = math.degrees(angle_rad)
 
     if angle_thresh< angle_deg < (180 - angle_thresh):
-        print("The lines are okay.")
+        print("The lines are okay.", file=sys.stderr)
         return angle_deg
     
     else:
-        print("The lines are too parallel to one another")
+        print("The lines are too parallel to one another", file=sys.stderr)
         return angle_deg
 
 def calibrate_gauge(filepath, output_path, line_key, pump_key):
@@ -211,7 +214,6 @@ def calibrate_gauge(filepath, output_path, line_key, pump_key):
     and the units (as a string)...
     """
 
-    # Reizes Image to (271, 262) using (4x4) Square
     img = cv2.imread(filepath)
     # img = cv2.resize(image, dsize=(271, 262), interpolation=cv2.INTER_CUBIC)
 
@@ -248,7 +250,7 @@ def calibrate_gauge(filepath, output_path, line_key, pump_key):
     # x_corr_offset = 4
     # x = x + x_corr_offset
 
-    print(f"x-centroid: {x}, y-centroid: {y}, radius: {r}")
+    print(f"x-centroid: {x}, y-centroid: {y}, radius: {r}", file=sys.stderr)
 
     # Draw Center and Circle
     cv2.circle(img, (x, y), r, (0, 0, 255), 3, cv2.LINE_AA)  # Draws Red Circle with thickness 3, 
@@ -480,7 +482,7 @@ def get_current_value(
                 line_pos_lst.append([x1, y1, x2, y2])
 
     # Jerrold
-    print(line_length_lst)
+    print(line_length_lst, file=sys.stderr)
     final_indx = line_length_lst.index(max(line_length_lst)) # Finds the position of the longest line
     final_line_list.append(line_pos_lst[final_indx]) # Appends final_line_list with the longest line
 
@@ -509,12 +511,12 @@ def get_current_value(
     x2, y2, x1corr, y1corr, x2corr, y2corr, x3corr, y3corr, x4corr, y4corr = intersect_hough_for_needle(lines,binary,img, x, y)
     
     angle = check_intersect_lines(x1corr, y1corr, x2corr, y2corr, x3corr, y3corr, x4corr, y4corr, angle_thresh=2)
-    print(f"Angle computed is {angle}")
+    print(f"Angle computed is {angle}", file=sys.stderr)
 
     angle_threshold = 1.5
 
     if angle <= angle_threshold:
-        print("Same edge, restarting algorithm")
+        print("Same edge, restarting algorithm", file=sys.stderr)
         python = sys.executable
         os.execv(python, [python] + sys.argv)
 
@@ -534,30 +536,30 @@ def get_current_value(
 
     # Find the farthest point from the center to be what is used to determine the angle
     dist_pt_0 = dist_2_pts(x, y, x1, y1)
-    print(x1)
-    print(y1)
-    print(x2)
-    print(y2)
-    print(dist_pt_0)
+    print(x1, file=sys.stderr)
+    print(y1, file=sys.stderr)
+    print(x2, file=sys.stderr)
+    print(y2, file=sys.stderr)
+    print(dist_pt_0, file=sys.stderr)
 
     dist_pt_1 = dist_2_pts(x, y, x2, y2)
-    print(dist_pt_1)
+    print(dist_pt_1, file=sys.stderr)
 
     # Angle Calculation
     if dist_pt_0 > dist_pt_1:
         x_angle = x1 - x    # x-offset
-        print(x1)
-        print(x)
-        print(x_angle)
+        print(x1, file=sys.stderr)
+        print(x, file=sys.stderr)
+        print(x_angle, file=sys.stderr)
         y_angle = y - y1    # y-offset
-        print(y_angle)
+        print(y_angle, file=sys.stderr)
     else:
         x_angle = x2 - x
         y_angle = y - y2
 
     # Take the arc tan of y/x to find the angle
     res = np.arctan(np.divide(float(y_angle), float(x_angle)))
-    print(res)
+    print(res, file=sys.stderr)
     # np.rad2deg(res) #coverts to degrees
 
     # print x_angle
@@ -593,9 +595,8 @@ def get_current_value(
     new_range = new_max - new_min # 4
     new_value = (((old_value - old_min) * new_range) / old_range) + new_min
 
-    print(new_value)
+    print(new_value, file=sys.stderr)
     return new_value
-
 
 def main(
     filepath,
@@ -610,7 +611,7 @@ def main(
             filepath, output_path, line_key, pump_key
         )
 
-        print(f"min_angle: {min_angle},\n max_angle: {max_angle},\n min_value: {min_value},\n max_value: {max_value},\n x-coor: {x},\n y-coor: {y},\n r-coor: {r}\n  ")
+        print(f"min_angle: {min_angle},\n max_angle: {max_angle},\n min_value: {min_value},\n max_value: {max_value},\n x-coor: {x},\n y-coor: {y},\n r-coor: {r}\n", file=sys.stderr)
 
         images = np.array(Image.open(filepath))
 
@@ -632,7 +633,7 @@ def main(
         cv2.destroyAllWindows()
 
         format_float = "{:.2f}".format(val) # 2sf
-        print(f"----result: {format_float}----")
+        print(format_float)
         return format_float
 
     except Exception as e:
