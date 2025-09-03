@@ -102,3 +102,11 @@ def get_host_info():
     
     except ValueError as e:
         return e
+
+
+def get_cam_details(config, line, pump, cam):
+    """
+        Retrieve all details for a given line, pump, cam
+    """
+
+    return config[line][pump][cam]

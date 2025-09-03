@@ -24,8 +24,11 @@ def getpgconnection(sqlparam):
 def create_pressure_header(pgConn, data):
     
     """
-        Selects first 7 items from the first row from cryro_pump_pressure_header
-            - [run_hdr_id, line, chamber, run_date, created_dt, host_name, local_ip]
+        Selects first 7 items from the first row from cryro_pump_pressure_header pgsql FXN
+            - [p_line, p_run_date, p_hostname, p_fqdn, p_local_ip, p_program_mode, p_program_version]
+        
+        The PGSQL FXN inserts into cryro_pump_uat.cryro_pump_pressure_header TABLE
+            - [line, run_date, created_date, hostname, fqdn, local_ip, program_mode, program_version] 
     """
     
     try:
@@ -47,9 +50,9 @@ def create_pressure_header(pgConn, data):
 def create_pressure_header_main(params, spt_db_connections):
 
     """
-        Connects to pgsql then selects first 7 items from the first \
-        row from cryro_pump_pressure_header
-
+        Connects to pgsql then inserts into
+            cryro_pump_uat.cryro_pump_pressure_header TABLE
+                - [line, run_date, created_date, hostname, fqdn, local_ip, program_mode, program_version] 
     """
     try:
         pgConn = None
@@ -71,7 +74,12 @@ def create_pressure_header_main(params, spt_db_connections):
 
 def create_run_data(pgConn,data):
 
-    """ Selects the first row from create_cryro_pump_run_data """
+    """ Selects the first row from create_cryro_pump_run_data FXN
+            - [p_run_hdr_id, p_spec_id, p_status, p_status_msg, p_pressure_val, p_folder_path]
+
+        From create_cryro_pump_run_data FXN insert into cryo_pressure_run_data TABLE
+            - [run_hdr_id, spec_id, status, status_msg, pressure_val, created_dt, folder_path]
+    """
 
     try:
         cur = pgConn.cursor()
@@ -88,7 +96,9 @@ def create_run_data(pgConn,data):
 
 def create_run_data_main(params, spt_db_connections):
 
-    """ Connects to PGSQL and selects the first row from create_cryro_pump_run_data """
+    """ Connects to PGSQL and inserts into
+            cryo_pressure_run_data TABLE
+                - [run_hdr_id, spec_id, status, status_msg, pressure_val, created_dt, folder_path] """
 
     try:
         pgConn = None

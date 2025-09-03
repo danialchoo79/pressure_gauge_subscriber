@@ -12,6 +12,7 @@ import time
 from process_img_rpi import main as process_image_main
 import subprocess
 import queue
+import read_pressure_main as rpm
 
 # MQTT Configuration
 MQTT_BROKER = "128.53.209.104"
@@ -59,6 +60,7 @@ message_count = 0
 
 # Queue
 image_queue = queue.Queue()
+result_queue = queue.Queue()
 
 # === Utility Functions ===
 
@@ -119,13 +121,25 @@ def process_worker():
         
         if value is not None:
             logging.info(f"Value is {value}")
+            result_queue.put((full_path, value))
        
         image_queue.task_done()
 
-# Start 4 workers in the background
+def result_handler():
+    while True:
+        full_path, value = result_queue.get()
+        logging.info(f"Handling result for {full_path} = {value}")
+        # Store the value in the Database
+        rpm.insert_db(value)
+        result_queue.task_done()
+
+# Start 4 Image Process workers in the background
 for _ in range(4):
     threading.Thread(target=process_worker, daemon=True).start()
-     
+
+# Start 1 DB Process worker in the background
+threading.Thread(target=result_handler, daemon = True).start()
+
 # === MQTT Callbacks ===
 def on_connect(client, userdata,flags, rc):
     if rc == 0:
