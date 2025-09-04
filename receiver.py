@@ -116,21 +116,21 @@ def run_processing(full_path, output_dir):
 def process_worker():
     """ Continuously process images from the queue """
     while True:
-        full_path, output_dir = image_queue.get()
+        full_path, output_dir, camera_id = image_queue.get()
         value = run_processing(full_path, output_dir)
         
         if value is not None:
             logging.info(f"Value is {value}")
-            result_queue.put((full_path, value))
+            result_queue.put((full_path, value, camera_id))
        
         image_queue.task_done()
 
 def result_handler():
     while True:
-        full_path, value = result_queue.get()
+        full_path, value, camera_id = result_queue.get()
         logging.info(f"Handling result for {full_path} = {value}")
         # Store the value in the Database
-        rpm.insert_db(value)
+        rpm.insert_db(value, camera_id)
         result_queue.task_done()
 
 # Start 4 Image Process workers in the background
@@ -215,7 +215,7 @@ def on_message(client, userdata, msg):
                     os.makedirs(output_dir, exist_ok=True)
 
                     # enqueue the processing task
-                    image_queue.put((full_path, output_dir))
+                    image_queue.put((full_path, output_dir, camera_id))
                     logging.info(f"Queued image for processing: {full_path}")
                     return
 
