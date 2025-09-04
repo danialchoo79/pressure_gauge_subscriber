@@ -128,9 +128,13 @@ def process_worker():
 def result_handler():
     while True:
         full_path, value, camera_id = result_queue.get()
-        logging.info(f"Handling result for {full_path} = {value}")
+        logging.info(f"Handling result for {full_path} (cam={camera_id}) = {value}")
         # Store the value in the Database
-        rpm.insert_db(value, camera_id)
+        try:
+            rpm.insert_db(value, camera_id)
+            logging.info("DB insert complete for cam=%s", camera_id)
+        except Exception as e:
+            logging.error(f"DB insert failed for {camera_id}: {e}")
         result_queue.task_done()
 
 # Start 4 Image Process workers in the background

@@ -9,7 +9,7 @@ def insert_db(value, cam_name):
     """
 
     try:
-        print("Starting Program")
+        print("Starting Insert DB Program")
 
         # Load adminConfigs
         main_config, db_config = helper.get_config()
@@ -34,9 +34,13 @@ def insert_db(value, cam_name):
 
         # Loop lines -> pumps -> cams
         run_id = None
+        ip_addr = None
+
         for line_key, pumps in line_config.items():
             for pump_key, cams in pumps.items():
+                print("Looking for camera: ", cam_name, "in config: ", cams.keys())
                 if cam_name in cams:
+
                     ip_addr = cams[cam_name]["ip"]
 
                     logger.info("Running Line: %s",line_key)
@@ -58,30 +62,40 @@ def insert_db(value, cam_name):
 
                     # Does the inserting of values and returns the pressure id
                     run_id = db.create_pressure_header_main(params, spt_db_connections)
+                    logger.info("DB header created for %s with run_id=%s", cam_name, run_id)
+                    print("run_id: ",run_id)
                     break
+            if run_id:
+                break
+        
+        if run_id is None:
+            raise ValueError(f"Camera {cam_name} is not found in config.")
 
-        if run_id:
-            # Insert into DB
-            try:
-                spec_id = 1
-                status = "PASS"
-                status_msg = "PASS"
-                result = value
-                run_data_param = (
-                    run_id,
-                    spec_id,
-                    status,
-                    status_msg,
-                    result,
-                    output_path
-                )
-                db.create_run_data_main(run_data_param, spt_db_connections)
-            except Exception as e:
-                raise e
+        spec_id = 1
+        status = "PASS"
+        status_msg = "PASS"
+        result = value
+        
+        try:   
+            run_data_param = (
+                run_id,
+                spec_id,
+                status,
+                status_msg,
+                result,
+                output_path
+            )
+            db.create_run_data_main(run_data_param, spt_db_connections)
+            logger.info(f"Inserted run data for {cam_name}")
+
+        except Exception as e:
+            print("Insert DB failed: ", e)
+            if 'logger' in locals():
+                logger.error(f"Insert DB failed {e}")
             
     except Exception as e:
         print(e)
-        logger.error(e)
+        logger.error("Error: %s",str(e))
         status = "FAIL"
         status_msg = e
         run_data_param = (

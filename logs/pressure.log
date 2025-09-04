@@ -1,0 +1,48 @@
+2025-09-04 09:19:31,387 - PRESSURE - INFO - Starting Process
+2025-09-04 09:19:31,389 - PRESSURE - INFO - Get Processing Time 	 2025-09-04_09-19-31
+2025-09-04 09:19:31,390 - PRESSURE - INFO - Retrieving line config
+2025-09-04 09:19:31,391 - PRESSURE - ERROR - [Errno 2] No such file or directory: '/home/admin/Desktop/pressure_gauge_subscriber/output/2025_09_04_09_19_31'
+2025-09-04 09:49:31,024 - PRESSURE - INFO - Starting Process
+2025-09-04 09:49:31,027 - PRESSURE - INFO - Get Processing Time 	 2025-09-04_09-49-31
+2025-09-04 09:49:31,030 - PRESSURE - INFO - Retrieving line config
+2025-09-04 09:49:31,035 - PRESSURE - ERROR - [Errno 2] No such file or directory: '/home/admin/Desktop/pressure_gauge_subscriber/output/2025_09_04_09_49_31'
+2025-09-04 10:02:29,866 - PRESSURE - INFO - Starting Process
+2025-09-04 10:02:29,868 - PRESSURE - INFO - Get Processing Time 	 2025-09-04_10-02-29
+2025-09-04 10:02:29,869 - PRESSURE - INFO - Retrieving line config
+2025-09-04 10:02:29,871 - PRESSURE - INFO - Created Base Folder
+2025-09-04 10:02:29,872 - PRESSURE - INFO - Retrieving Host Info Started
+2025-09-04 10:02:29,877 - PRESSURE - INFO - Running Line: 201
+2025-09-04 10:02:29,878 - PRESSURE - INFO - Pump: PRESSURE_PUMP_1
+2025-09-04 10:02:29,879 - PRESSURE - INFO - Cam: cam2
+2025-09-04 10:02:29,880 - PRESSURE - INFO - IP: 128.53.208.2
+2025-09-04 10:02:30,151 - PRESSURE - ERROR - not all arguments converted during string formatting
+2025-09-04 10:05:58,716 - PRESSURE - INFO - Starting Process
+2025-09-04 10:05:58,718 - PRESSURE - INFO - Get Processing Time 	 2025-09-04_10-05-58
+2025-09-04 10:05:58,719 - PRESSURE - INFO - Retrieving line config
+2025-09-04 10:05:58,721 - PRESSURE - INFO - Created Base Folder
+2025-09-04 10:05:58,722 - PRESSURE - INFO - Retrieving Host Info Started
+2025-09-04 10:05:58,725 - PRESSURE - INFO - Running Line: 201
+2025-09-04 10:05:58,726 - PRESSURE - INFO - Pump: PRESSURE_PUMP_1
+2025-09-04 10:05:58,726 - PRESSURE - INFO - Cam: cam2
+2025-09-04 10:05:58,727 - PRESSURE - INFO - IP: 128.53.208.2
+2025-09-04 10:05:58,797 - PRESSURE - ERROR - Error: not all arguments converted during string formatting
+2025-09-04 10:06:56,154 - PRESSURE - INFO - Starting Process
+2025-09-04 10:06:56,156 - PRESSURE - INFO - Get Processing Time 	 2025-09-04_10-06-56
+2025-09-04 10:06:56,157 - PRESSURE - INFO - Retrieving line config
+2025-09-04 10:06:56,159 - PRESSURE - INFO - Created Base Folder
+2025-09-04 10:06:56,161 - PRESSURE - INFO - Retrieving Host Info Started
+2025-09-04 10:06:56,165 - PRESSURE - INFO - Running Line: 201
+2025-09-04 10:06:56,168 - PRESSURE - INFO - Pump: PRESSURE_PUMP_1
+2025-09-04 10:06:56,168 - PRESSURE - INFO - Cam: cam2
+2025-09-04 10:06:56,169 - PRESSURE - INFO - IP: 128.53.208.2
+2025-09-04 10:06:56,241 - PRESSURE - ERROR - Error: not all arguments converted during string formatting
+2025-09-04 10:12:57,959 - PRESSURE - INFO - Starting Process
+2025-09-04 10:12:57,961 - PRESSURE - INFO - Get Processing Time 	 2025-09-04_10-12-57
+2025-09-04 10:12:57,962 - PRESSURE - INFO - Retrieving line config
+2025-09-04 10:12:57,963 - PRESSURE - INFO - Created Base Folder
+2025-09-04 10:12:57,964 - PRESSURE - INFO - Retrieving Host Info Started
+2025-09-04 10:12:57,967 - PRESSURE - INFO - Running Line: 201
+2025-09-04 10:12:57,968 - PRESSURE - INFO - Pump: PRESSURE_PUMP_1
+2025-09-04 10:12:57,969 - PRESSURE - INFO - Cam: cam2
+2025-09-04 10:12:57,969 - PRESSURE - INFO - IP: 128.53.208.2
+2025-09-04 10:12:58,039 - PRESSURE - ERROR - Error: not all arguments converted during string formatting
